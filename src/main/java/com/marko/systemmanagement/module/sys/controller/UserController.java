@@ -1,0 +1,30 @@
+package com.marko.systemmanagement.module.sys.controller;
+
+import com.marko.systemmanagement.module.sys.model.User;
+import com.marko.systemmanagement.module.sys.service.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+
+@Slf4j
+@RestController
+@RequestMapping("/api/sys_user")
+public class UserController {
+
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("/saving")
+    public User createUser(@Valid @RequestBody User user) {
+        return userService.saveNewUser(user);
+    }
+
+
+}
